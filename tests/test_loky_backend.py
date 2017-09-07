@@ -117,6 +117,7 @@ class TestLokyBackend:
             yield None
 
         with capsys.disabled() if sys.version_info[:2] == (3, 3) else no_mgr():
+            print("start test_process")
             q = self.Queue()
             sq = self.SimpleQueue()
             args = (q, sq, 1, 2)
