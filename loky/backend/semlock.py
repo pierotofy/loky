@@ -212,9 +212,14 @@ class SemLock(object):
                             raise ValueError(
                                 "semaphore or lock released too many times")
                 else:
-                    import warnings
-                    warnings.warn("semaphore are broken on OSX, release might "
-                                  "increase its maximal value", RuntimeWarning)
+                    # Warning: semaphore are broken on OSX, release might 
+                    # increase its maximal value
+                    
+                    # On OSX, we won't be able to cancel jobs because as soon as we submit them, 
+                    # they will be put in queue and thus considered running
+
+                    # If we have no need to cancel jobs, we can ignore this Warning
+                    pass
             else:
                 value = self._get_value()
                 if value >= self.maxvalue:
